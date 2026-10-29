@@ -116,11 +116,17 @@ body {
   color: var(--text);
   font-size: 22px;
   cursor: pointer;
-  transition: background 0.12s, transform 0.06s;
+  /* 버튼 아래에 부드러운 그림자를 추가해서 입체감 주기 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
 }
 
 .key:hover { background: var(--key-hover); }
-.key:active { transform: scale(0.94); }
+.key:active { 
+  transform: scale(0.94); 
+  /* 클릭하면 그림자가 얕아지면서 눌리는 느낌이 남 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
 
 .key--func { background: var(--func); }
 
