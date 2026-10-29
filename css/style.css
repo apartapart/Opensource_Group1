@@ -61,6 +61,11 @@ body {
   background: var(--func);
   color: var(--text);
   cursor: pointer;
+  transition: background 0.15s; 
+}
+
+.mode-toggle:hover {
+  background: var(--key-hover);
 }
 
 .display {
