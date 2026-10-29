@@ -2,7 +2,8 @@ const calc = new Calculator();
 
 const valueEl = document.getElementById("value");
 const expressionEl = document.getElementById("expression");
-const keysEl = document.querySelector(".keys");
+const scientificKeysEl = document.getElementById("scientific-keys");
+const modeToggleEl = document.getElementById("mode-toggle");
 
 const ACTIONS = {
   clear: () => calc.clear(),
@@ -11,12 +12,15 @@ const ACTIONS = {
   backspace: () => calc.backspace(),
   decimal: () => calc.inputDecimal(),
   equals: () => calc.equals(),
+  angle: () => calc.toggleAngleMode(),
 };
 
 function render() {
   valueEl.textContent = calc.current;
   valueEl.classList.toggle("display__value--small", calc.current.length > 9);
   expressionEl.textContent = calc.expression;
+  scientificKeysEl.hidden = scientificKeysEl.dataset.enabled !== "true";
+  scientificKeysEl.querySelector('[data-action="angle"]').textContent = calc.angleMode;
 
   document.querySelectorAll("[data-operator]").forEach((btn) => {
     btn.classList.toggle(
@@ -26,13 +30,22 @@ function render() {
   });
 }
 
-keysEl.addEventListener("click", (e) => {
+document.querySelector(".calculator").addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
-  const { number, operator, action } = btn.dataset;
+  const { number, operator, action, function: functionName, constant } = btn.dataset;
   if (number !== undefined) calc.inputDigit(number);
   else if (operator) calc.setOperator(operator);
+  else if (functionName) calc.applyFunction(functionName);
+  else if (constant) calc.inputConstant(constant);
   else if (action && ACTIONS[action]) ACTIONS[action]();
+  render();
+});
+
+modeToggleEl.addEventListener("click", () => {
+  const enabled = scientificKeysEl.dataset.enabled === "true";
+  scientificKeysEl.dataset.enabled = String(!enabled);
+  modeToggleEl.textContent = enabled ? "공학용" : "일반";
   render();
 });
 

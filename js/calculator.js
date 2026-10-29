@@ -4,6 +4,7 @@ const OPERATIONS = {
   "-": { symbol: "−", fn: (a, b) => a - b },
   "*": { symbol: "×", fn: (a, b) => a * b },
   "/": { symbol: "÷", fn: (a, b) => (b === 0 ? NaN : a / b) },
+  "^": { symbol: "ʸ", fn: (a, b) => a ** b },
 };
 
 const MAX_DIGITS = 12;
@@ -19,6 +20,7 @@ class Calculator {
     this.operator = null;
     this.waitingForOperand = false;
     this.expression = "";
+    this.angleMode = this.angleMode || "DEG";
   }
 
   inputDigit(digit) {
@@ -58,6 +60,53 @@ class Calculator {
   percent() {
     if (this.current === "Error") return;
     this.current = Calculator.format(parseFloat(this.current) / 100);
+  }
+
+  inputConstant(name) {
+    if (this.current === "Error") this.clear();
+    const value = name === "pi" ? Math.PI : Math.E;
+    this.current = Calculator.format(value);
+    this.waitingForOperand = false;
+  }
+
+  applyFunction(name) {
+    if (this.current === "Error") return;
+    const value = parseFloat(this.current);
+    const angle = this.angleMode === "DEG" ? (value * Math.PI) / 180 : value;
+    let result;
+    if (name === "sin") result = Math.sin(angle);
+    else if (name === "cos") result = Math.cos(angle);
+    else if (name === "tan") result = Math.tan(angle);
+    else if (name === "asin") result = this.toAngle(Math.asin(value));
+    else if (name === "acos") result = this.toAngle(Math.acos(value));
+    else if (name === "atan") result = this.toAngle(Math.atan(value));
+    else if (name === "log") result = Math.log10(value);
+    else if (name === "ln") result = Math.log(value);
+    else if (name === "sqrt") result = Math.sqrt(value);
+    else if (name === "square") result = value ** 2;
+    else if (name === "reciprocal") result = value === 0 ? NaN : 1 / value;
+    else if (name === "factorial") {
+      result = Number.isInteger(value) && value >= 0 && value <= 170
+        ? Calculator.factorial(value)
+        : NaN;
+    }
+    this.current = Number.isFinite(result) ? Calculator.format(result) : "Error";
+    this.waitingForOperand = true;
+    this.expression = this.current === "Error" ? "" : `${name}(${value})`;
+  }
+
+  toggleAngleMode() {
+    this.angleMode = this.angleMode === "DEG" ? "RAD" : "DEG";
+  }
+
+  toAngle(radians) {
+    return this.angleMode === "DEG" ? (radians * 180) / Math.PI : radians;
+  }
+
+  static factorial(num) {
+    let result = 1;
+    for (let i = 2; i <= num; i += 1) result *= i;
+    return result;
   }
 
   setOperator(op) {
