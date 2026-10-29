@@ -111,7 +111,6 @@ class Calculator {
 
   setOperator(op) {
     if (this.current === "Error") return;
-    // 연산자를 연속으로 누르면 마지막 것만 반영
     if (this.operator && this.waitingForOperand) {
       this.operator = op;
       this.expression = `${this.previous} ${OPERATIONS[op].symbol}`;
@@ -143,8 +142,6 @@ class Calculator {
     this.operator = null;
     this.waitingForOperand = true;
   }
-
-  // 0.1 + 0.2 같은 부동소수점 오차를 잘라 표시용 문자열로 변환
   static format(num) {
     const rounded = parseFloat(num.toPrecision(MAX_DIGITS));
     const str = String(rounded);

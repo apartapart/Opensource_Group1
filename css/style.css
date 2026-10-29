@@ -134,3 +134,46 @@ body {
   background: var(--text);
   color: var(--op);
 }
+
+.calculator {
+  transition: width 1s ease-in-out;
+}
+
+.calculator.is-scientific {
+  width: 360px;
+}
+
+.keys--scientific {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-bottom: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+
+  transition:
+    max-height 1s ease-in-out,
+    opacity 0.8s ease-in-out,
+    transform 1s ease-in-out,
+    margin-bottom 1s ease-in-out;
+}
+
+.keys--scientific.is-open {
+  max-height: 320px;
+  opacity: 1;
+  margin-bottom: 12px;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.key {
+  transition:
+    background 0.12s,
+    transform 0.06s,
+    opacity 0.15s ease;
+}
+
+.key:active {
+  opacity: 0.55;
+  transform: scale(0.94);
+}
