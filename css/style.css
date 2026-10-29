@@ -1,0 +1,98 @@
+:root {
+  --bg: #1e1f24;
+  --body: #2b2d34;
+  --display: #16171b;
+  --key: #3a3d46;
+  --key-hover: #474b56;
+  --func: #5a5e6b;
+  --op: #f19a37;
+  --op-hover: #f5ad5c;
+  --text: #f4f4f6;
+  --text-dim: #9a9cab;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  font-family: -apple-system, "Segoe UI", "Noto Sans KR", sans-serif;
+  color: var(--text);
+}
+
+.calculator {
+  width: 320px;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--body);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.display {
+  height: 110px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--display);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.display__expression {
+  min-height: 20px;
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+.display__value {
+  font-size: 44px;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.display__value--small {
+  font-size: 30px;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.key {
+  height: 62px;
+  border: none;
+  border-radius: 50%;
+  background: var(--key);
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.06s;
+}
+
+.key:hover { background: var(--key-hover); }
+.key:active { transform: scale(0.94); }
+
+.key--func { background: var(--func); }
+
+.key--op,
+.key--equals { background: var(--op); }
+
+.key--op:hover,
+.key--equals:hover { background: var(--op-hover); }
+
+.key--op.is-active {
+  background: var(--text);
+  color: var(--op);
+}

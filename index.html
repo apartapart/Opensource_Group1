@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="calculator">
+    <section class="display">
+      <div class="display__expression" id="expression"></div>
+      <div class="display__value" id="value">0</div>
+    </section>
+
+    <!-- 버튼 추가: data-action(clear/sign/percent/backspace/decimal/equals),
+         data-number(숫자), data-operator(js/calculator.js 의 OPERATIONS 키) -->
+    <section class="keys">
+      <button class="key key--func" data-action="clear">AC</button>
+      <button class="key key--func" data-action="sign">±</button>
+      <button class="key key--func" data-action="percent">%</button>
+      <button class="key key--op" data-operator="/">÷</button>
+
+      <button class="key" data-number="7">7</button>
+      <button class="key" data-number="8">8</button>
+      <button class="key" data-number="9">9</button>
+      <button class="key key--op" data-operator="*">×</button>
+
+      <button class="key" data-number="4">4</button>
+      <button class="key" data-number="5">5</button>
+      <button class="key" data-number="6">6</button>
+      <button class="key key--op" data-operator="-">−</button>
+
+      <button class="key" data-number="1">1</button>
+      <button class="key" data-number="2">2</button>
+      <button class="key" data-number="3">3</button>
+      <button class="key key--op" data-operator="+">+</button>
+
+      <button class="key" data-action="backspace">⌫</button>
+      <button class="key" data-number="0">0</button>
+      <button class="key" data-action="decimal">.</button>
+      <button class="key key--equals" data-action="equals">=</button>
+    </section>
+  </main>
+
+  <script src="js/calculator.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
