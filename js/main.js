@@ -89,8 +89,30 @@ const KEY_MAP = {
   "%": "percent",
 };
 
+const SCIENTIFIC_KEY_MAP = {
+  s: "sin",
+  c: "cos",
+  t: "tan",
+  S: "asin",
+  C: "acos",
+  T: "atan",
+  q: "sqrt",
+  l: "log",
+  n: "ln",
+  f: "factorial",
+  i: "reciprocal",
+};
+
 document.addEventListener("keydown", (e) => {
-  if (/^\d$/.test(e.key)) {
+  const scientificFunction = SCIENTIFIC_KEY_MAP[e.key];
+  if (
+    scientificFunction &&
+    scientificKeysEl.dataset.enabled === "true"
+  ) {
+    calc.applyFunction(scientificFunction);
+  } else if (scientificFunction) {
+    return;
+  } else if (/^\d$/.test(e.key)) {
     calc.inputDigit(e.key);
   } else if (OPERATIONS[e.key]) {
     calc.setOperator(e.key);
