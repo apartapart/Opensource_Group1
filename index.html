@@ -8,14 +8,35 @@
 </head>
 <body>
   <main class="calculator">
+    <header class="calculator__header">
+      <span class="calculator__title">계산기</span>
+      <button class="mode-toggle" id="mode-toggle" type="button">공학용</button>
+    </header>
     <section class="display">
       <div class="display__expression" id="expression"></div>
       <div class="display__value" id="value">0</div>
     </section>
 
-    <!-- 버튼 추가: data-action(clear/sign/percent/backspace/decimal/equals),
-         data-number(숫자), data-operator(js/calculator.js 의 OPERATIONS 키) -->
-    <section class="keys">
+    <section class="keys keys--scientific" id="scientific-keys" hidden>
+      <button class="key key--func" data-action="angle">DEG</button>
+      <button class="key key--func" data-constant="pi">π</button>
+      <button class="key key--func" data-constant="e">e</button>
+      <button class="key key--func" data-function="sqrt">√</button>
+      <button class="key key--func" data-function="square">x²</button>
+      <button class="key key--op" data-operator="^">xʸ</button>
+      <button class="key key--func" data-function="reciprocal">1/x</button>
+      <button class="key key--func" data-function="factorial">n!</button>
+      <button class="key key--func" data-function="sin">sin</button>
+      <button class="key key--func" data-function="cos">cos</button>
+      <button class="key key--func" data-function="tan">tan</button>
+      <button class="key key--func" data-function="log">log</button>
+      <button class="key key--func" data-function="ln">ln</button>
+      <button class="key key--func" data-function="asin">sin⁻¹</button>
+      <button class="key key--func" data-function="acos">cos⁻¹</button>
+      <button class="key key--func" data-function="atan">tan⁻¹</button>
+    </section>
+
+    <section class="keys keys--basic">
       <button class="key key--func" data-action="clear">AC</button>
       <button class="key key--func" data-action="sign">±</button>
       <button class="key key--func" data-action="percent">%</button>
