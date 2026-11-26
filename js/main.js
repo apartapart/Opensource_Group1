@@ -29,10 +29,9 @@ function render() {
     scientificKeysEl.dataset.enabled === "true";
 
   scientificKeysEl.hidden = false;
-
+  scientificKeysEl.inert = !isScientific;
+  scientificKeysEl.setAttribute("aria-hidden", String(!isScientific));
   scientificKeysEl.classList.toggle("is-open", isScientific);
-  calculatorEl.classList.toggle("is-scientific", isScientific);
-
   scientificKeysEl
     .querySelector('[data-action="angle"]')
     .textContent = calc.angleMode;
@@ -78,7 +77,6 @@ modeToggleEl.addEventListener("click", () => {
 
   scientificKeysEl.dataset.enabled = String(!enabled);
   modeToggleEl.textContent = enabled ? "공학용" : "일반";
-
   render();
 });
 
